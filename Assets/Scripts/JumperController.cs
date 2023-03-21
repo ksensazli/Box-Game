@@ -28,11 +28,11 @@ public class JumperController : MonoBehaviour
       {
          DOTween.Kill(_rotationBase);
 
-         DOTween.Sequence().Append(_rotationBase.DOLocalRotate(_targetRotation.localRotation.eulerAngles, .2f)
+         DOTween.Sequence().Append(_rotationBase.DOLocalRotate(_targetRotation.localRotation.eulerAngles, .125f)
             .SetEase(Ease.OutSine))
             .AppendCallback(sendBoxesToTarget)
-            .AppendInterval(.1f)
-            .Append(_rotationBase.DOLocalRotate(Vector3.zero, .2f)
+            .AppendInterval(.05f)
+            .Append(_rotationBase.DOLocalRotate(Vector3.zero, .075f)
             .SetEase(Ease.OutSine))
             .OnComplete(onJumperResetted);
 
