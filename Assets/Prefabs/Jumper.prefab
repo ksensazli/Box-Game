@@ -381,6 +381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2828307129987834624}
   - component: {fileID: 1945554120}
+  - component: {fileID: 1945554121}
   m_Layer: 0
   m_Name: Jumper
   m_TagString: Untagged
@@ -420,6 +421,19 @@ MonoBehaviour:
   _rotationBase: {fileID: 2828307130098082986}
   _targetRotation: {fileID: 397754526}
   _zoneType: 0
+--- !u!65 &1945554121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828307129987834625}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8409679, y: 1, z: 0.977474}
+  m_Center: {x: -0.0037543774, y: 0, z: -0.31536305}
 --- !u!1 &2828307130098082987
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +482,7 @@ GameObject:
   - component: {fileID: 2828307130287354987}
   - component: {fileID: 2828307130287354988}
   - component: {fileID: 2828307130287354989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: First Area (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +594,7 @@ GameObject:
   - component: {fileID: 2828307130606530196}
   - component: {fileID: 2828307130606530197}
   - component: {fileID: 2828307130606530198}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: First Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,7 +706,7 @@ GameObject:
   - component: {fileID: 2828307130830956872}
   - component: {fileID: 2828307130830956873}
   - component: {fileID: 2828307130830956874}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: First Area (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -933,6 +947,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 99eaa7a358749c9469f6039a72623e86,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21c84ddc5475b4534a604a1bb55e750d, type: 2}
     - target: {fileID: 919132149155446097, guid: 99eaa7a358749c9469f6039a72623e86,
         type: 3}
       propertyPath: m_Name
