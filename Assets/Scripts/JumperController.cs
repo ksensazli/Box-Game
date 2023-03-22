@@ -9,12 +9,14 @@ public class JumperController : MonoBehaviour
    [SerializeField] private Transform _rotationBase;
    [SerializeField] private Transform _targetRotation;
    [SerializeField] private eZoneType _zoneType;
+   [SerializeField] private MeshRenderer _meshRenderer;
    private List<BoxController> _boxControllers = new List<BoxController>();
    
 
    private void OnEnable()
    {
       JumpButton.OnJumpButton += OnJumpButton;
+      _meshRenderer.materials[2].color = GameConfig.instance.ZoneVariables.ZoneTypeDict[_zoneType].MainColor;
    }
 
    private void OnDisable()
