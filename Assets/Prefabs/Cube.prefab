@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddc1a2536715a24095c464a2c394d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateMethod: 0
+  updateMethod: 1
   _spline: {fileID: 0}
   _autoUpdate: 1
   _rotationModifier:
@@ -203,6 +203,7 @@ MonoBehaviour:
     m_Bits: 64
   _rigidBody: {fileID: 2542277523669659019}
   _boxCollider: {fileID: 2542277523669659018}
+  _meshRenderer: {fileID: 3784833834271154465}
   ZoneType: 0
 --- !u!54 &2542277523669659019
 Rigidbody:
@@ -325,6 +326,12 @@ PrefabInstance:
 --- !u!4 &2651848930786237006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4c611c20c5f46824fb2a1276d4631188,
+    type: 3}
+  m_PrefabInstance: {fileID: 2542277523207503269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3784833834271154465 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 4c611c20c5f46824fb2a1276d4631188,
     type: 3}
   m_PrefabInstance: {fileID: 2542277523207503269}
   m_PrefabAsset: {fileID: 0}

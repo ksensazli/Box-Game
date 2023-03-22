@@ -11,13 +11,15 @@ public class BoxController : MonoBehaviour
   [SerializeField] private LayerMask _layerMask;
   [SerializeField] private Rigidbody _rigidBody;
   [SerializeField] private BoxCollider _boxCollider;
-  
+  [SerializeField] private MeshRenderer _meshRenderer;
+
   private RaycastHit dummyHit;
   public eZoneType ZoneType;
   
   private void OnEnable()
   {
-    
+    //Material
+    _meshRenderer.materials[1].color = GameConfig.instance.ZoneVariables.ZoneTypeDict[ZoneType].MainColor;
   }
 
   private void OnDisable()
@@ -54,17 +56,23 @@ public class BoxController : MonoBehaviour
           UnityEngine.Random.Range(-0.75f, 0.75f));
          transform.DOJump(targetPos,2,1,1)
          .OnComplete(()=>activateRigidBody(true));
-     
-      
       }
       else
       {
-        transform.DOJump(TargetBoxesManager.Instance.GetTargetBoxController(ZoneType)
-          .transform.position + new Vector3(UnityEngine.Random.Range(-2,2),1.5f,UnityEngine.Random.Range(1.5f,2)),2,1,1)
-          .OnComplete(()=>activateRigidBody(false));
+        FalseThrow();
       }
-     
     }
+    else
+    {
+      FalseThrow();
+    }
+  }
+
+  private void FalseThrow()
+  {
+    transform.DOJump(TargetBoxesManager.Instance.GetTargetBoxController(ZoneType)
+        .transform.position + new Vector3(UnityEngine.Random.Range(-2,2),1.5f,UnityEngine.Random.Range(1.5f,2)),2,1,1)
+      .OnComplete(()=>activateRigidBody(false));
   }
 
   private void OnTriggerEnter(Collider other) {

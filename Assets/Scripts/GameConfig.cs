@@ -1,9 +1,10 @@
 using System;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameConfig", menuName = "ScriptableObjects/GameConfig", order = 1)]
-public class GameConfig : ScriptableObject
+public class GameConfig : ScriptableSingleton<GameConfig>
 {
         public ZoneTypeVariablesEditor ZoneVariables = new ZoneTypeVariablesEditor();
 }
