@@ -18,3 +18,11 @@ MonoBehaviour:
       valueData:
       - MainColor: {r: 0.3647059, g: 0.67058825, b: 0.17254902, a: 1}
       - MainColor: {r: 1, g: 0, b: 0, a: 1}
+  LevelVariables:
+    Levels:
+    - BoxAmount: 20
+      targetBoxAmount: 5
+    - BoxAmount: 30
+      targetBoxAmount: 6
+    - BoxAmount: 10
+      targetBoxAmount: 4
