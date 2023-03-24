@@ -10,14 +10,14 @@ public class JumpButton : MonoBehaviour
     private void OnEnable()
     {
         _selfButton.onClick.AddListener(OnButtonDown);
-        JumperController.onJumperReset += onJumperReset;
+        JumperControllerBase.onJumperReset += onJumperReset;
 
         _selfButton.image.color = GameConfig.instance.ZoneVariables.ZoneTypeDict[_zoneType].MainColor;
     }
 
     private void OnDisable()
     {
-        JumperController.onJumperReset -= onJumperReset;
+        JumperControllerBase.onJumperReset -= onJumperReset;
     }
 
     private void onJumperReset(eZoneType obj)

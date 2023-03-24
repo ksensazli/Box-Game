@@ -37,25 +37,35 @@ public class BoxController : MonoBehaviour
     _splineFollower.enabled = false;
   }
 
-  public void jump()
+  public void jump(bool isJumperOnAir)
   {
+    bool isAirJumper = GameConfig.instance.LevelVariables.Levels[0].HasJumperOnAir;
     transform.parent = null;
 
-    if (Physics.Raycast(transform.position+transform.up, transform.TransformDirection(Vector3.down), out dummyHit, Mathf.Infinity, _layerMask))
+    if (Physics.Raycast(transform.position+transform.up, transform.TransformDirection(Vector3.down), out dummyHit, Mathf.Infinity, _layerMask) || isJumperOnAir)
     {
  
       var throwerZone = dummyHit.transform.GetComponent<ThrowerZone>();
  
-      transform.DORotate(new Vector3(360,0,0),1f,RotateMode.WorldAxisAdd);
+     // transform.DORotate(new Vector3(360,0,0),1f,RotateMode.WorldAxisAdd);
 
-      if (ZoneType.Equals(throwerZone.ZoneType) && !throwerZone.IsRed)
+      if (ZoneType.Equals(throwerZone.ZoneType) && !throwerZone.IsRed || isJumperOnAir)
       {
-        _rigidBody.useGravity = true;
-        var targetPos = TargetBoxesManager.Instance.GetTargetBoxController(ZoneType)
-          .transform.position + new Vector3(UnityEngine.Random.Range(-0.75f, 0.75f), 1f,
-          UnityEngine.Random.Range(-0.75f, 0.75f));
-         transform.DOJump(targetPos,2,1,1)
-         .OnComplete(()=>activateRigidBody(true));
+       // _rigidBody.useGravity = true;
+      
+        if (isAirJumper && !isJumperOnAir)
+        {
+          ThrowToAir();
+        }
+        else if(isJumperOnAir)
+        {
+          ThrowToBox();
+        }
+        else
+        {
+          ThrowToBox();
+        }
+ 
       }
       else
       {
@@ -68,6 +78,18 @@ public class BoxController : MonoBehaviour
     }
   }
 
+  private void ThrowToBox()
+  {
+    var targetPos = TargetBoxesManager.Instance.GetTargetBoxController(ZoneType).transform.position;
+    transform.DOJump(targetPos,2,1,1)
+      .OnComplete(()=>activateRigidBody(true));
+  }
+
+  private void ThrowToAir()
+  {
+    var targetPos = JumpersManager.Instance.GetAirJumper().transform.position;
+    transform.DOMove(targetPos,  1);
+  }
   private void FalseThrow()
   {
     transform.DOJump(TargetBoxesManager.Instance.GetTargetBoxController(ZoneType)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class GameConfig : ScriptableSingleton<GameConfig>
 {
         public ZoneTypeVariablesEditor ZoneVariables = new ZoneTypeVariablesEditor();
         public LevelVariablesEditor LevelVariables = new LevelVariablesEditor();
+        public JumperVariablesEditor JumpersVariables = new JumperVariablesEditor();
 }
 
 [Serializable]
@@ -34,5 +36,20 @@ public class LevelVariablesEditor
         {
                 public int BoxAmount;
                 public int targetBoxAmount;
+                public bool HasJumperOnAir;
         }
+}
+
+[Serializable]
+public class JumperVariablesEditor
+{
+        public DefaultTween JumperJumpTween;
+        public float Delay;
+        public DefaultTween JumperResetTween;
+}
+[Serializable]
+public struct DefaultTween
+{
+        public float Duration;
+        public Ease Ease;
 }

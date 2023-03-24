@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZoneVariables:
     ZoneTypeDict:
-      keyData: 0000000001000000
+      keyData: 000000000100000002000000
       valueData:
       - MainColor: {r: 1, g: 0.9865521, b: 0.11792451, a: 1}
       - MainColor: {r: 1, g: 0, b: 0, a: 1}
+      - MainColor: {r: 1, g: 0.7877358, b: 0.7877358, a: 1}
   LevelVariables:
     Levels:
     - BoxAmount: 20
@@ -26,3 +27,11 @@ MonoBehaviour:
       targetBoxAmount: 6
     - BoxAmount: 10
       targetBoxAmount: 4
+  JumpersVariables:
+    JumperJumpTween:
+      Duration: 0.125
+      Ease: 3
+    Delay: 0
+    JumperResetTween:
+      Duration: 0.1
+      Ease: 3
