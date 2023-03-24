@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class JumperControllerBase : MonoBehaviour
 {
-
-   private JumperVariablesEditor jumperVars => GameConfig.instance.JumpersVariables;
+   
    public static Action<eZoneType> onJumperReset;
    [SerializeField] private Transform _rotationBase;
    [SerializeField] private Transform _targetRotation;
@@ -40,12 +39,12 @@ public class JumperControllerBase : MonoBehaviour
          
          DOTween.Kill(_rotationBase);
 
-         DOTween.Sequence().Append(_rotationBase.DOLocalRotate(_targetRotation.localRotation.eulerAngles, jumperVars.JumperJumpTween.Duration)
-            .SetEase(jumperVars.JumperJumpTween.Ease))
+         DOTween.Sequence().Append(_rotationBase.DOLocalRotate(_targetRotation.localRotation.eulerAngles,  GameConfig.instance.JumpersVariables.JumperJumpTween.Duration)
+            .SetEase( GameConfig.instance.JumpersVariables.JumperJumpTween.Ease))
             .AppendCallback(()=>sendBoxesToTarget(boxesToThrow))
-            .AppendInterval(jumperVars.Delay)
-            .Append(_rotationBase.DOLocalRotate(Vector3.zero, jumperVars.JumperResetTween.Duration)
-            .SetEase(jumperVars.JumperResetTween.Ease))
+            .AppendInterval( GameConfig.instance.JumpersVariables.Delay)
+            .Append(_rotationBase.DOLocalRotate(Vector3.zero,  GameConfig.instance.JumpersVariables.JumperResetTween.Duration)
+            .SetEase( GameConfig.instance.JumpersVariables.JumperResetTween.Ease))
             .OnComplete(onJumperResetted);
 
          for (int i = 0; i < boxesToThrow.Count; i++)
