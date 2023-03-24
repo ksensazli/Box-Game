@@ -23,10 +23,13 @@ MonoBehaviour:
     Levels:
     - BoxAmount: 20
       targetBoxAmount: 5
+      HasJumperOnAir: 1
     - BoxAmount: 30
       targetBoxAmount: 6
+      HasJumperOnAir: 0
     - BoxAmount: 10
       targetBoxAmount: 4
+      HasJumperOnAir: 0
   JumpersVariables:
     JumperJumpTween:
       Duration: 0.125
@@ -35,3 +38,13 @@ MonoBehaviour:
     JumperResetTween:
       Duration: 0.1
       Ease: 3
+  BoxVariables:
+    DefaultJumpTween:
+      Duration: 0
+      Ease: 0
+    DefaultToAirJumpTween:
+      Duration: 0
+      Ease: 0
+    AirToBoxJumpTween:
+      Duration: 0
+      Ease: 0

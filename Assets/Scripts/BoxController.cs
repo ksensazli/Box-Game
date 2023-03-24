@@ -39,12 +39,11 @@ public class BoxController : MonoBehaviour
 
   public void jump(bool isJumperOnAir)
   {
-    bool isAirJumper = GameConfig.instance.LevelVariables.Levels[0].HasJumperOnAir;
+    bool hasJumperOnAir = GameConfig.instance.LevelVariables.Levels[0].HasJumperOnAir;
     transform.parent = null;
 
     if (Physics.Raycast(transform.position+transform.up, transform.TransformDirection(Vector3.down), out dummyHit, Mathf.Infinity, _layerMask) || isJumperOnAir)
     {
- 
       var throwerZone = dummyHit.transform.GetComponent<ThrowerZone>();
  
      // transform.DORotate(new Vector3(360,0,0),1f,RotateMode.WorldAxisAdd);
@@ -52,30 +51,18 @@ public class BoxController : MonoBehaviour
       if (ZoneType.Equals(throwerZone.ZoneType) && !throwerZone.IsRed || isJumperOnAir)
       {
        // _rigidBody.useGravity = true;
-      
-        if (isAirJumper && !isJumperOnAir)
+       if (hasJumperOnAir && !isJumperOnAir)
         {
           ThrowToAir();
-        }
-        else if(isJumperOnAir)
-        {
-          ThrowToBox();
         }
         else
         {
           ThrowToBox();
         }
- 
-      }
-      else
-      {
-        FalseThrow();
+        return;
       }
     }
-    else
-    {
-      FalseThrow();
-    }
+    FalseThrow();
   }
 
   private void ThrowToBox()

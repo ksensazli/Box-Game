@@ -17,11 +17,11 @@ public class JumpersManager : MonoBehaviour
    }
 
    [SerializeField] private List<JumperControllerBase> _defaultJumpers;
-   [SerializeField] private List<JumperControllerBase> _airJumpers;
+   [SerializeField] private List<JumperOnAir> _airJumpers;
 
 
    public Transform GetAirJumper()
    {
-      return _airJumpers[UnityEngine.Random.Range(0, _airJumpers.Count)].transform;
+      return _airJumpers[UnityEngine.Random.Range(0, _airJumpers.Count)].BoxCenterPos.transform;
    }
 }
