@@ -11,24 +11,27 @@ public class JumperControllerBase : MonoBehaviour
    [SerializeField] private Transform _targetRotation;
    [SerializeField] private eZoneType _zoneType;
    [SerializeField] private MeshRenderer _meshRenderer;
-   [SerializeField] private bool _isJumperOnAir;
    private List<BoxController> _boxControllers = new List<BoxController>();
    
 
-   private void OnEnable()
+   protected virtual void OnEnable()
    {
-      JumpButton.OnJumpButton += OnJumpButton;
       _meshRenderer.materials[2].color = GameConfig.instance.ZoneVariables.ZoneTypeDict[_zoneType].MainColor;
    }
 
-   private void OnDisable()
+   protected virtual void OnDisable()
    {
-      JumpButton.OnJumpButton -= OnJumpButton;
+      
    }
 
-   private void OnJumpButton(eZoneType obj)
+   protected void OnJumpButton(eZoneType obj)
    {
-      if (obj.Equals(_zoneType))
+      JumperStart(obj);
+   }
+
+   protected void JumperStart(eZoneType obj, bool isForced = false)
+   {
+      if (obj.Equals(_zoneType) || isForced)
       {
          List<BoxController> boxesToThrow = new List<BoxController>();
          for (int i = 0; i < _boxControllers.Count; i++)
@@ -40,11 +43,11 @@ public class JumperControllerBase : MonoBehaviour
          DOTween.Kill(_rotationBase);
 
          DOTween.Sequence().Append(_rotationBase.DOLocalRotate(_targetRotation.localRotation.eulerAngles,  GameConfig.instance.JumpersVariables.JumperJumpTween.Duration)
-            .SetEase( GameConfig.instance.JumpersVariables.JumperJumpTween.Ease))
+               .SetEase( GameConfig.instance.JumpersVariables.JumperJumpTween.Ease))
             .AppendCallback(()=>sendBoxesToTarget(boxesToThrow))
             .AppendInterval( GameConfig.instance.JumpersVariables.Delay)
             .Append(_rotationBase.DOLocalRotate(Vector3.zero,  GameConfig.instance.JumpersVariables.JumperResetTween.Duration)
-            .SetEase( GameConfig.instance.JumpersVariables.JumperResetTween.Ease))
+               .SetEase( GameConfig.instance.JumpersVariables.JumperResetTween.Ease))
             .OnComplete(onJumperResetted);
 
          for (int i = 0; i < boxesToThrow.Count; i++)
@@ -54,7 +57,6 @@ public class JumperControllerBase : MonoBehaviour
          }
       }
    }
-
    private void onJumperResetted()
    {
       onJumperReset?.Invoke(_zoneType);
@@ -64,18 +66,27 @@ public class JumperControllerBase : MonoBehaviour
    {
       for (int i = 0; i < boxesToThrow.Count; i++)
       {
-         boxesToThrow[i].jump(_isJumperOnAir);
+         ThrowToTarget(boxesToThrow[i]);
       }
       boxesToThrow.Clear();
+   }
+
+   protected virtual void ThrowToTarget(BoxController targetBox)
+   {
+      
    }
 
    private void OnTriggerEnter(Collider other) {
       if(other.CompareTag("box"))
       {
-         _boxControllers.Add(other.GetComponent<BoxController>());
+         BoxCollided(other.GetComponent<BoxController>());
       }
    }
 
+   protected virtual void BoxCollided(BoxController boxController)
+   {
+      _boxControllers.Add(boxController);
+   }
    private void OnTriggerExit(Collider other) {
       if(other.CompareTag("box"))
       {

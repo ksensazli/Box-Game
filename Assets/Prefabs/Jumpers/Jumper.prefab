@@ -381,7 +381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2828307129987834624}
   - component: {fileID: 1945554121}
-  - component: {fileID: 5386059530406506963}
+  - component: {fileID: 602333157819166558}
   m_Layer: 0
   m_Name: Jumper
   m_TagString: Untagged
@@ -419,7 +419,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8409679, y: 1, z: 0.977474}
   m_Center: {x: -0.0037543774, y: 0, z: -0.31536305}
---- !u!114 &5386059530406506963
+--- !u!114 &602333157819166558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2828307129987834625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65d9be9ac63ad4b729d73b83109851cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a7daf1af0ee70a4996860e8ac319226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationBase: {fileID: 2828307130098082986}

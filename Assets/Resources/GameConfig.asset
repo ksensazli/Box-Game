@@ -43,8 +43,8 @@ MonoBehaviour:
       Duration: 0
       Ease: 0
     DefaultToAirJumpTween:
-      Duration: 0
-      Ease: 0
+      Duration: 0.4
+      Ease: 1
     AirToBoxJumpTween:
-      Duration: 0
-      Ease: 0
+      Duration: 0.4
+      Ease: 1

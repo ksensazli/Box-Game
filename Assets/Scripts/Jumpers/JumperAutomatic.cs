@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class JumperAutomatic : JumperControllerBase
 {
-  
+  protected override void BoxCollided(BoxController boxController)
+  {
+    base.BoxCollided(boxController);
+    JumperStart(eZoneType.Type1, true);
+  }
 }

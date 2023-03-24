@@ -35,6 +35,8 @@ public class BoxController : MonoBehaviour
   public void stopMovement()
   {
     _splineFollower.enabled = false;
+    _rigidBody.useGravity = false;
+    _rigidBody.velocity = Vector3.zero;
   }
 
   public void jump(bool isJumperOnAir)
@@ -42,11 +44,11 @@ public class BoxController : MonoBehaviour
     bool hasJumperOnAir = GameConfig.instance.LevelVariables.Levels[0].HasJumperOnAir;
     transform.parent = null;
 
-    if (Physics.Raycast(transform.position+transform.up, transform.TransformDirection(Vector3.down), out dummyHit, Mathf.Infinity, _layerMask) || isJumperOnAir)
+    if (Physics.Raycast(transform.position+transform.up, transform.TransformDirection(Vector3.down), out dummyHit, Mathf.Infinity, _layerMask))
     {
       var throwerZone = dummyHit.transform.GetComponent<ThrowerZone>();
  
-     // transform.DORotate(new Vector3(360,0,0),1f,RotateMode.WorldAxisAdd);
+      //transform.DORotate(new Vector3(360,0,0),1f,RotateMode.WorldAxisAdd);
 
       if (ZoneType.Equals(throwerZone.ZoneType) && !throwerZone.IsRed || isJumperOnAir)
       {
@@ -62,6 +64,11 @@ public class BoxController : MonoBehaviour
         return;
       }
     }
+    else if(isJumperOnAir)
+    {
+      ThrowAirToBox();
+      return;
+    }
     FalseThrow();
   }
 
@@ -75,7 +82,22 @@ public class BoxController : MonoBehaviour
   private void ThrowToAir()
   {
     var targetPos = JumpersManager.Instance.GetAirJumper().transform.position;
-    transform.DOMove(targetPos,  1);
+    transform.DOMove(targetPos, GameConfig.instance.BoxVariables.DefaultToAirJumpTween.Duration)
+      .SetEase(GameConfig.instance.BoxVariables.DefaultToAirJumpTween.Ease)
+      .OnComplete(FallFromAir);
+  }
+
+  private void FallFromAir()
+  {
+    _rigidBody.useGravity = true;
+    _rigidBody.AddForce((new Vector3(UnityEngine.Random.Range(.1f,.5f),-1f,.25f)) * 5, ForceMode.Impulse);
+  }
+  
+  private void ThrowAirToBox()
+  {
+    var targetPos = TargetBoxesManager.Instance.GetTargetBoxController(ZoneType).transform.position;
+    transform.DOMove(targetPos, GameConfig.instance.BoxVariables.AirToBoxJumpTween.Duration)
+      .SetEase(GameConfig.instance.BoxVariables.AirToBoxJumpTween.Ease);
   }
   private void FalseThrow()
   {

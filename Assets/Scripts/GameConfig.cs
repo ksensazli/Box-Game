@@ -11,6 +11,7 @@ public class GameConfig : ScriptableSingleton<GameConfig>
         public ZoneTypeVariablesEditor ZoneVariables = new ZoneTypeVariablesEditor();
         public LevelVariablesEditor LevelVariables = new LevelVariablesEditor();
         public JumperVariablesEditor JumpersVariables = new JumperVariablesEditor();
+        public BoxVariablesEditor BoxVariables = new BoxVariablesEditor();
 }
 
 [Serializable]
@@ -52,4 +53,12 @@ public struct DefaultTween
 {
         public float Duration;
         public Ease Ease;
+}
+
+[Serializable]
+public class BoxVariablesEditor
+{
+        public DefaultTween DefaultJumpTween;
+        public DefaultTween DefaultToAirJumpTween;
+        public DefaultTween AirToBoxJumpTween;
 }

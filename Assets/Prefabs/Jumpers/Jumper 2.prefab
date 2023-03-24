@@ -41,9 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2828307129987834624}
   - component: {fileID: 1945554121}
-  - component: {fileID: 8522957317072792211}
+  - component: {fileID: 964561265016215611}
   m_Layer: 0
-  m_Name: Jumper 1
+  m_Name: Jumper 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8409679, y: 1, z: 0.977474}
   m_Center: {x: -0.0037543774, y: 0, z: -0.31536305}
---- !u!114 &8522957317072792211
+--- !u!114 &964561265016215611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,14 +89,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2828307129987834625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc5ba2f9d252c3e429d374fb21999402, type: 3}
+  m_Script: {fileID: 11500000, guid: 92b486f41ea804da283dcb9523db1f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationBase: {fileID: 2828307130098082986}
   _targetRotation: {fileID: 397754526}
   _zoneType: 0
   _meshRenderer: {fileID: 3495285859437228808}
-  BoxCenterPos: {fileID: 8560941023214916231}
 --- !u!1 &2828307130098082987
 GameObject:
   m_ObjectHideFlags: 0
