@@ -23,7 +23,7 @@ MonoBehaviour:
     Levels:
     - BoxAmount: 20
       targetBoxAmount: 5
-      HasJumperOnAir: 1
+      HasJumperOnAir: 0
     - BoxAmount: 30
       targetBoxAmount: 6
       HasJumperOnAir: 0

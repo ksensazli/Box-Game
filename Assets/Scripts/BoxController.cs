@@ -37,19 +37,20 @@ public class BoxController : MonoBehaviour
     _splineFollower.enabled = false;
     _rigidBody.useGravity = false;
     _rigidBody.velocity = Vector3.zero;
+    DOTween.Kill(transform);
   }
 
   public void jump(bool isJumperOnAir)
   {
     bool hasJumperOnAir = GameConfig.instance.LevelVariables.Levels[0].HasJumperOnAir;
     transform.parent = null;
-
+    
     if (Physics.Raycast(transform.position+transform.up, transform.TransformDirection(Vector3.down), out dummyHit, Mathf.Infinity, _layerMask))
     {
       var throwerZone = dummyHit.transform.GetComponent<ThrowerZone>();
  
       //transform.DORotate(new Vector3(360,0,0),1f,RotateMode.WorldAxisAdd);
-
+      
       if (ZoneType.Equals(throwerZone.ZoneType) && !throwerZone.IsRed || isJumperOnAir)
       {
        // _rigidBody.useGravity = true;
