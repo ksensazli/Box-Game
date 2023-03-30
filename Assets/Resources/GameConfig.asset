@@ -16,20 +16,20 @@ MonoBehaviour:
     ZoneTypeDict:
       keyData: 000000000100000002000000
       valueData:
-      - MainColor: {r: 1, g: 0.9865521, b: 0.11792451, a: 1}
-      - MainColor: {r: 1, g: 0, b: 0, a: 1}
-      - MainColor: {r: 1, g: 0.7877358, b: 0.7877358, a: 1}
+      - MainColor: {r: 0.003921569, g: 0.92941177, b: 0.9607843, a: 1}
+        ZoneMaterial: {fileID: 2100000, guid: 92bef03adb92a4571b5fee779e761b44, type: 2}
+        ButtonSprite: {fileID: 21300000, guid: 575995d3e1b55504ba37949c77be227e, type: 3}
+      - MainColor: {r: 0.9647059, g: 0.7921569, b: 0.26666668, a: 1}
+        ZoneMaterial: {fileID: 2100000, guid: 4995707109db34bab80ec926d235f78b, type: 2}
+        ButtonSprite: {fileID: 21300000, guid: 8fc1f3ea1410bf84bbe19d885a01b159, type: 3}
+      - MainColor: {r: 0.49019608, g: 0.9529412, b: 0.27058825, a: 1}
+        ZoneMaterial: {fileID: 2100000, guid: 0a8a0b740b7d14f7bae220c3bcdff7b3, type: 2}
+        ButtonSprite: {fileID: 21300000, guid: b86d3dae59f512f43bfc6079ebaf744c, type: 3}
   LevelVariables:
     Levels:
-    - BoxAmount: 20
-      targetBoxAmount: 5
-      HasJumperOnAir: 0
-    - BoxAmount: 30
-      targetBoxAmount: 6
-      HasJumperOnAir: 0
-    - BoxAmount: 10
-      targetBoxAmount: 4
-      HasJumperOnAir: 0
+    - {fileID: 2714273113869847644, guid: 174571eb48c424f4cbb3bd933809d1b7, type: 3}
+    - {fileID: 2714273113869847644, guid: b55a5b65ecbb647bcad8825383e2cd67, type: 3}
+    - {fileID: 2714273113869847644, guid: 0c0908ba907ec4c29b5ef0a380498012, type: 3}
   JumpersVariables:
     JumperJumpTween:
       Duration: 0.125
@@ -48,3 +48,45 @@ MonoBehaviour:
     AirToBoxJumpTween:
       Duration: 0.4
       Ease: 1
+  DefaultTweenVariables:
+    DefaultScaleUpTween:
+      Duration: 0.3
+      Ease: 27
+    DefaultScaleDownTween:
+      Duration: 0.3
+      Ease: 26
+    DefaultFadeTween:
+      Duration: 0.3
+      Ease: 3
+  MenuVariables:
+    MenuFadeInTween:
+      Duration: 0.3
+      Ease: 3
+    MenuFadeOutTween:
+      Duration: 0.3
+      Ease: 3
+    DelayToLevelCompleteScreen: 3
+  Haptics:
+    HapticsData:
+      keyData: 00000000010000000200000003000000
+      valueData: 04000000050000000300000001000000
+    DelayBetweenHaptics: 0.1
+  Sound:
+    SoundsDict:
+      keyData: 0000000001000000020000000300000004000000
+      valueData:
+      - Clip: {fileID: 8300000, guid: 424c55cc560904fc1919898d50142fc3, type: 3}
+        Volume: 1
+        Pitch: 1
+      - Clip: {fileID: 8300000, guid: 1c1c22f6425e54e1791cba580cc40958, type: 3}
+        Volume: 1
+        Pitch: 1
+      - Clip: {fileID: 8300000, guid: f1c4ddf0170c142ccbe434b7728743a2, type: 3}
+        Volume: 1
+        Pitch: 1
+      - Clip: {fileID: 8300000, guid: 3bf5b49a221e4489da084200c13681f4, type: 3}
+        Volume: 1
+        Pitch: 1
+      - Clip: {fileID: 8300000, guid: c61da74cf19954967862502a48034522, type: 3}
+        Volume: 1
+        Pitch: 1

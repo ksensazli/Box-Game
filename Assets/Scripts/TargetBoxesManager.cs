@@ -1,30 +1,70 @@
-using System.Collections.Generic;
+using System;
+using NiceSDK;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class TargetBoxesManager : MonoBehaviour
+public class TargetBoxesManager : MonoBehaviourSingleton<TargetBoxesManager>
 {
-    public static TargetBoxesManager Instance { get; private set; }
-    private void Awake() 
+    [Serializable] public class TargetBoxesDict : UnitySerializedDictionary<eZoneType, TargetBoxController> { };
+    [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)]
+    public TargetBoxesDict TargetBoxes;
+    
+    private void OnEnable()
     {
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
+        GameManager.OnLevelStarted += OnLevelStarted;
     }
 
-    public List<ThrowerZone> BoxControllers;
-
-    public ThrowerZone GetTargetBoxController(eZoneType zoneType)
+    public override void OnDisable()
     {
-        foreach (var VARIABLE in BoxControllers)
+        base.OnDisable();
+        GameManager.OnLevelStarted -= OnLevelStarted;
+    }
+
+    private void OnLevelStarted()
+    {
+        var includedTypes = LevelManager.Instance.CurrentLevelData.IncludedZone.Count;
+
+        foreach (var VARIABLE in TargetBoxes)
         {
-            if (VARIABLE.ZoneType.Equals(zoneType))
+            VARIABLE.Value.gameObject.SetActive(false);
+        }
+
+        foreach (var VARIABLE in LevelManager.Instance.CurrentLevelData.IncludedZone)
+        {
+            TargetBoxes[VARIABLE.Key].gameObject.SetActive(true);
+        }
+        //TO DO CHECK THIS
+        if (includedTypes.Equals(1))
+        {
+            TargetBoxes[eZoneType.Type1].transform.position = new Vector3(
+                0,
+                TargetBoxes[eZoneType.Type1].transform.position.y,
+                TargetBoxes[eZoneType.Type1].transform.position.z);
+        }
+        else if (includedTypes.Equals(2))
+        {
+            TargetBoxes[eZoneType.Type1].transform.position = new Vector3(
+                -2,
+                TargetBoxes[eZoneType.Type1].transform.position.y,
+                TargetBoxes[eZoneType.Type1].transform.position.z);
+            TargetBoxes[eZoneType.Type2].transform.position = new Vector3(
+                2,
+                TargetBoxes[eZoneType.Type2].transform.position.y,
+                TargetBoxes[eZoneType.Type2].transform.position.z);
+        }
+        else
+        {
+            
+        }
+    }
+
+    public TargetBoxController GetTargetBoxController(eZoneType zoneType)
+    {
+        foreach (var VARIABLE in TargetBoxes)
+        {
+            if (VARIABLE.Key.Equals(zoneType))
             {
-                return VARIABLE;
+                return VARIABLE.Value;
             }
         }
 

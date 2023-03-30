@@ -7,16 +7,30 @@ public class JumperControllerBase : MonoBehaviour
 {
    
    public static Action<eZoneType> onJumperReset;
-   [SerializeField] private Transform _rotationBase;
+   [SerializeField] protected Transform _rotationBase;
    [SerializeField] private Transform _targetRotation;
-   [SerializeField] private eZoneType _zoneType;
-   [SerializeField] private MeshRenderer _meshRenderer;
+   [SerializeField] protected eZoneType _zoneType;
+   [SerializeField] protected MeshRenderer _meshRenderer;
+   [SerializeField] public int _index;
+   
+   public bool IsThrowing;
+   public eZoneType ZoneType => _zoneType;
+
    private List<BoxController> _boxControllers = new List<BoxController>();
    
-
+   public void SetData(eZoneType zoneType)
+   {
+      _zoneType = zoneType;
+      ThrowerZone[] throwerZone = GetComponentsInChildren<ThrowerZone>();
+      foreach (var VARIABLE in throwerZone)
+      {
+         VARIABLE.ZoneType = _zoneType;
+      }
+      
+   }
    protected virtual void OnEnable()
    {
-      _meshRenderer.materials[2].color = GameConfig.instance.ZoneVariables.ZoneTypeDict[_zoneType].MainColor;
+     
    }
 
    protected virtual void OnDisable()
@@ -33,6 +47,7 @@ public class JumperControllerBase : MonoBehaviour
    {
       if (obj.Equals(_zoneType) || isForced)
       {
+         IsThrowing = true;
          List<BoxController> boxesToThrow = new List<BoxController>();
          for (int i = 0; i < _boxControllers.Count; i++)
          {
@@ -42,12 +57,12 @@ public class JumperControllerBase : MonoBehaviour
          
          DOTween.Kill(_rotationBase);
 
-         DOTween.Sequence().Append(_rotationBase.DOLocalRotate(_targetRotation.localRotation.eulerAngles,  GameConfig.instance.JumpersVariables.JumperJumpTween.Duration)
-               .SetEase( GameConfig.instance.JumpersVariables.JumperJumpTween.Ease))
+         DOTween.Sequence().Append(_rotationBase.DOLocalRotate(_targetRotation.localRotation.eulerAngles,  GameConfig.Instance.JumpersVariables.JumperJumpTween.Duration)
+               .SetEase( GameConfig.Instance.JumpersVariables.JumperJumpTween.Ease))
             .AppendCallback(()=>sendBoxesToTarget(boxesToThrow))
-            .AppendInterval( GameConfig.instance.JumpersVariables.Delay)
-            .Append(_rotationBase.DOLocalRotate(Vector3.zero,  GameConfig.instance.JumpersVariables.JumperResetTween.Duration)
-               .SetEase( GameConfig.instance.JumpersVariables.JumperResetTween.Ease))
+            .AppendInterval( GameConfig.Instance.JumpersVariables.Delay)
+            .Append(_rotationBase.DOLocalRotate(Vector3.zero,  GameConfig.Instance.JumpersVariables.JumperResetTween.Duration)
+               .SetEase( GameConfig.Instance.JumpersVariables.JumperResetTween.Ease))
             .OnComplete(onJumperResetted);
 
          for (int i = 0; i < boxesToThrow.Count; i++)
@@ -59,6 +74,7 @@ public class JumperControllerBase : MonoBehaviour
    }
    private void onJumperResetted()
    {
+      IsThrowing = false;
       onJumperReset?.Invoke(_zoneType);
    }
 
@@ -76,7 +92,7 @@ public class JumperControllerBase : MonoBehaviour
       
    }
 
-   private void OnTriggerEnter(Collider other) {
+   protected virtual void OnTriggerEnter(Collider other) {
       if(other.CompareTag("box"))
       {
          BoxCollided(other.GetComponent<BoxController>());

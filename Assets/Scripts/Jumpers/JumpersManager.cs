@@ -1,27 +1,41 @@
-using System.Collections.Generic;
+using System.Linq;
+using NiceSDK;
 using UnityEngine;
 
-public class JumpersManager : MonoBehaviour
+public class JumpersManager : MonoBehaviourSingleton<JumpersManager>
 {
-   public static JumpersManager Instance { get; private set; }
-   private void Awake() 
+
+   [SerializeField] private JumperControllerBase[]  _totalAirJumpers;
+   [SerializeField] private JumperOnAir[] _airJumpers;
+   [SerializeField] private JumperAutomatic[] _automaticJumpers;
+
+   private void OnEnable()
    {
-      if (Instance != null && Instance != this) 
-      { 
-         Destroy(this); 
-      } 
-      else 
-      { 
-         Instance = this; 
-      } 
+      GameManager.OnLevelStarted += OnLevelStarted;
    }
 
-   [SerializeField] private List<JumperControllerBase> _defaultJumpers;
-   [SerializeField] private List<JumperOnAir> _airJumpers;
-
-
-   public Transform GetAirJumper()
+   public override void OnDisable()
    {
-      return _airJumpers[UnityEngine.Random.Range(0, _airJumpers.Count)].BoxCenterPos.transform;
+      base.OnDisable();
+      GameManager.OnLevelStarted -= OnLevelStarted;
+   }
+
+   private void OnLevelStarted()
+   {
+      LevelVariablesEditor.LevelData level = LevelManager.Instance.Level.LevelData;
+      _airJumpers = level.JumpersOnAir;
+      _automaticJumpers = level.JumpersAutomatic;
+
+      _totalAirJumpers = _airJumpers.Concat<JumperControllerBase>(_automaticJumpers).ToArray();
+      for (int i = 0; i < _totalAirJumpers.Length; i++)
+      {
+         _totalAirJumpers[i]._index = i;
+      }
+   }
+
+   public bool HasMoreJumperOnAir(int index) => _totalAirJumpers.Length > index;
+   public Transform GetAirJumper(int index)
+   {
+      return _totalAirJumpers[index].transform;
    }
 }

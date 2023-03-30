@@ -6,6 +6,7 @@ TagManager:
   tags:
   - box
   - boxWall
+  - CollectionBox
   layers:
   - Default
   - TransparentFX

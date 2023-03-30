@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2542277522913488022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -128,9 +128,9 @@ MonoBehaviour:
   _dontLerpDirection: 0
   _physicsMode: 0
   _motion:
-    _hasOffset: 0
+    _hasOffset: 1
     _hasRotationOffset: 0
-    _offset: {x: 0, y: 0}
+    _offset: {x: 0, y: 0.2}
     _rotationOffset: {x: 0, y: 0, z: 0}
     _baseScale: {x: 1, y: 1, z: 1}
     _2dMode: 0
@@ -205,6 +205,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 2542277523669659018}
   _meshRenderer: {fileID: 3784833834271154465}
   ZoneType: 0
+  AirJumperIndex: 0
 --- !u!54 &2542277523669659019
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -233,7 +234,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.4, z: 0.4}
-  m_Center: {x: 0, y: 0.2, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2542277523207503269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -335,7 +336,7 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 2542277523207503269}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3372755573736710308
+--- !u!1001 &5258721126247717578
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
