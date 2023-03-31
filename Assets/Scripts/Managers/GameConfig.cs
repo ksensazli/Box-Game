@@ -46,6 +46,8 @@ public class LevelVariablesEditor
         public class LevelData
         {
                 public bool HasJumperOnAir => (JumpersOnAir.Length + JumpersAutomatic.Length) > 0;
+                public bool IsTopDown => LevelCameraType.Equals(CameraManager.eCameras.TopDownLevel);
+                public CameraManager.eCameras LevelCameraType;
                 public int TotalBoxSpawnAmount;
                 public List<LevelSplineData> Splines;
                 
@@ -126,7 +128,8 @@ public class HapticVariablesEditor
 [Serializable]
 public class SoundVariablesEditor
 {
-        [Serializable,BoxGroup, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)] public class SoundDictionary : UnitySerializedDictionary<eSFXTypes, SoundVariables> { };
+        [Serializable,BoxGroup, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
+        public class SoundDictionary : UnitySerializedDictionary<eSFXTypes, SoundVariables> { };
         public SoundDictionary SoundsDict;
         [Serializable]
         public class SoundVariables

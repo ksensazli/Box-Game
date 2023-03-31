@@ -98,6 +98,11 @@ public class BoxController : MonoBehaviour
     DOTween.Kill(transform);
   }
 
+  public void SetParentToJumper(Transform parent)
+  {
+    transform.parent = parent;
+  }
+
   private void Update()
   {
     if (!_isCollected)
@@ -132,7 +137,7 @@ public class BoxController : MonoBehaviour
          // _rigidBody.useGravity = true;
          if (hasJumperOnAir && !isJumperOnAir)
          {
-            ThrowToAir(); 
+            ThrowToAir(60); 
          }
          else
          {
@@ -147,7 +152,7 @@ public class BoxController : MonoBehaviour
       transform.GetChild(0).DORotate(new Vector3(360,0,0),1f,RotateMode.WorldAxisAdd);
       if (JumpersManager.Instance.HasMoreJumperOnAir(AirJumperIndex))
       {
-        ThrowToAir();
+        ThrowToAir(20);
       }
       else
       {
@@ -175,17 +180,21 @@ public class BoxController : MonoBehaviour
   }
  
 
-  private void ThrowToAir()
+  private void ThrowToAir(float rotation)
   {
 
     _rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 //    Debug.LogError(JumpersManager.Instance.GetAirJumper().transform.position);
+    // _rigidBody
+    //   .AddForce(TKExtensions.CalculateVelocity(_rigidBody.position, JumpersManager.Instance.GetAirJumper(AirJumperIndex++).transform.position,rotation) * _rigidBody.mass, ForceMode.Impulse);
     _rigidBody.velocity 
-      = TKExtensions.CalculateVelocity(_rigidBody.position, JumpersManager.Instance.GetAirJumper(AirJumperIndex++).transform.position,60);
+      = TKExtensions.CalculateVelocity(_rigidBody.position, JumpersManager.Instance.GetAirJumper(AirJumperIndex++).transform.position,rotation);
   }
 
   public void FallFromAir(Vector3 direction)
   {
+    transform.parent = null;
+    _rigidBody.useGravity = true;
     _rigidBody.velocity = (direction * 4) ;
     DOVirtual.DelayedCall(5,ReturnToPool);
   }
@@ -219,6 +228,7 @@ public class BoxController : MonoBehaviour
   {
     if (other.CompareTag(nameof(eTags.CollectionBox)) && !_isCollected && _isCorrectThrow)
     {
+      SoundManager.Instance.PlaySound(eSFXTypes.SuccessBox);
       _isCollected = true;
       OnBoxCollected?.Invoke(ZoneType); 
     }

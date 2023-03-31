@@ -22,14 +22,26 @@ MonoBehaviour:
       - MainColor: {r: 0.9647059, g: 0.7921569, b: 0.26666668, a: 1}
         ZoneMaterial: {fileID: 2100000, guid: 4995707109db34bab80ec926d235f78b, type: 2}
         ButtonSprite: {fileID: 21300000, guid: 8fc1f3ea1410bf84bbe19d885a01b159, type: 3}
-      - MainColor: {r: 0.49019608, g: 0.9529412, b: 0.27058825, a: 1}
+      - MainColor: {r: 0.3373695, g: 0.8396226, b: 0.099012084, a: 1}
         ZoneMaterial: {fileID: 2100000, guid: 0a8a0b740b7d14f7bae220c3bcdff7b3, type: 2}
         ButtonSprite: {fileID: 21300000, guid: b86d3dae59f512f43bfc6079ebaf744c, type: 3}
   LevelVariables:
     Levels:
     - {fileID: 2714273113869847644, guid: 174571eb48c424f4cbb3bd933809d1b7, type: 3}
     - {fileID: 2714273113869847644, guid: b55a5b65ecbb647bcad8825383e2cd67, type: 3}
+    - {fileID: 2714273113869847644, guid: 2063c03b3950545d2bb25d7ccd3af273, type: 3}
+    - {fileID: 2714273113869847644, guid: e3ff3626abe604efa9d24d6be88b2e74, type: 3}
+    - {fileID: 2714273113869847644, guid: f2b074eca9be74681b134f0ff46b8a86, type: 3}
+    - {fileID: 2714273113869847644, guid: f303ccd6f6de047eab40ca54c3f8f399, type: 3}
+    - {fileID: 2714273113869847644, guid: d6be676e43cee4e659732af9714d3167, type: 3}
+    - {fileID: 2714273113869847644, guid: 0bf559adb655c4244ae9e2a3595a3cb7, type: 3}
+    - {fileID: 2714273113869847644, guid: 043ebb244a86249d7a86a2a43c3b1f55, type: 3}
     - {fileID: 2714273113869847644, guid: 0c0908ba907ec4c29b5ef0a380498012, type: 3}
+    - {fileID: 2714273113869847644, guid: 3a66b971f338f47078d5219dcad65e9a, type: 3}
+    - {fileID: 2714273113869847644, guid: 919b50b0fdde34818a78705780513549, type: 3}
+    - {fileID: 2714273113869847644, guid: b4cbd4b2cc23b449baf5d4455ba69b74, type: 3}
+    - {fileID: 2714273113869847644, guid: 43d42157f59554e8e8451ce2bb4b1fe5, type: 3}
+    - {fileID: 2714273113869847644, guid: 7899809601b6a44e0adbc95c71fa95ed, type: 3}
   JumpersVariables:
     JumperJumpTween:
       Duration: 0.125
@@ -73,7 +85,7 @@ MonoBehaviour:
     DelayBetweenHaptics: 0.1
   Sound:
     SoundsDict:
-      keyData: 0000000001000000020000000300000004000000
+      keyData: 000000000100000002000000030000000400000005000000
       valueData:
       - Clip: {fileID: 8300000, guid: 424c55cc560904fc1919898d50142fc3, type: 3}
         Volume: 1
@@ -88,5 +100,8 @@ MonoBehaviour:
         Volume: 1
         Pitch: 1
       - Clip: {fileID: 8300000, guid: c61da74cf19954967862502a48034522, type: 3}
+        Volume: 1
+        Pitch: 1
+      - Clip: {fileID: 8300000, guid: 7e1cd9850fafe43959f90593606b8f79, type: 3}
         Volume: 1
         Pitch: 1

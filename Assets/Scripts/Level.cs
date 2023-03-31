@@ -45,7 +45,11 @@ public class Level : MonoBehaviour
             JumperDefault[] jumperDefaultChilds = cubeSpawners[i].transform.GetComponentsInChildren<JumperDefault>(true);
             for (int j = 0; j < jumperDefaultChilds.Length; j++)
             {
-                levelSplineData.IncludedZoneTypes.Add(jumperDefaultChilds[j].ZoneType);    
+                if (!levelSplineData.IncludedZoneTypes.Contains(jumperDefaultChilds[j].ZoneType))
+                {
+                    levelSplineData.IncludedZoneTypes.Add(jumperDefaultChilds[j].ZoneType);    
+                }
+              
             }
           
             if (LevelData.Splines.Count > i)
@@ -68,6 +72,7 @@ public class Level : MonoBehaviour
 
     private void OnEnable()
     {
+        CameraManager.Instance.SwitchCamera(LevelData.LevelCameraType);
         for (int i = 0; i < _cubeSpawners.Count; i++)
         {
             _cubeSpawners[i].Init(LevelData.Splines[i]);

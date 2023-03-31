@@ -6,7 +6,9 @@ using UnityEngine;
 public class TargetBoxesManager : MonoBehaviourSingleton<TargetBoxesManager>
 {
     [Serializable] public class TargetBoxesDict : UnitySerializedDictionary<eZoneType, TargetBoxController> { };
-    [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)]
+
+    [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)] 
+    [SerializeField] private GameObject _floor;
     public TargetBoxesDict TargetBoxes;
     
     private void OnEnable()
@@ -23,7 +25,8 @@ public class TargetBoxesManager : MonoBehaviourSingleton<TargetBoxesManager>
     private void OnLevelStarted()
     {
         var includedTypes = LevelManager.Instance.CurrentLevelData.IncludedZone.Count;
-
+        var isTopDown = LevelManager.Instance.CurrentLevelData.IsTopDown;
+        _floor.gameObject.SetActive(!isTopDown);
         foreach (var VARIABLE in TargetBoxes)
         {
             VARIABLE.Value.gameObject.SetActive(false);
@@ -33,7 +36,7 @@ public class TargetBoxesManager : MonoBehaviourSingleton<TargetBoxesManager>
         {
             TargetBoxes[VARIABLE.Key].gameObject.SetActive(true);
         }
-        //TO DO CHECK THIS
+        //TO DO CHECK THIS MESS
         if (includedTypes.Equals(1))
         {
             TargetBoxes[eZoneType.Type1].transform.position = new Vector3(
@@ -46,15 +49,26 @@ public class TargetBoxesManager : MonoBehaviourSingleton<TargetBoxesManager>
             TargetBoxes[eZoneType.Type1].transform.position = new Vector3(
                 -2,
                 TargetBoxes[eZoneType.Type1].transform.position.y,
-                TargetBoxes[eZoneType.Type1].transform.position.z);
+                isTopDown ? 5f :  TargetBoxes[eZoneType.Type1].transform.position.z);
             TargetBoxes[eZoneType.Type2].transform.position = new Vector3(
                 2,
                 TargetBoxes[eZoneType.Type2].transform.position.y,
-                TargetBoxes[eZoneType.Type2].transform.position.z);
+                isTopDown ? 5f : TargetBoxes[eZoneType.Type2].transform.position.z);
         }
         else
         {
-            
+            TargetBoxes[eZoneType.Type1].transform.position = new Vector3(
+                -2.5f,
+                TargetBoxes[eZoneType.Type1].transform.position.y,
+                TargetBoxes[eZoneType.Type1].transform.position.z);
+            TargetBoxes[eZoneType.Type2].transform.position = new Vector3(
+                0,
+                TargetBoxes[eZoneType.Type2].transform.position.y,
+                TargetBoxes[eZoneType.Type2].transform.position.z);
+            TargetBoxes[eZoneType.Type3].transform.position = new Vector3(
+                2.5f,
+                TargetBoxes[eZoneType.Type3].transform.position.y,
+                TargetBoxes[eZoneType.Type3].transform.position.z);
         }
     }
 

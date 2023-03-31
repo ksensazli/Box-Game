@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class JumperControllerBase : MonoBehaviour
 {
-   
+   public Action OnThrow;
    public static Action<eZoneType> onJumperReset;
    [SerializeField] protected Transform _rotationBase;
    [SerializeField] private Transform _targetRotation;
@@ -38,7 +38,7 @@ public class JumperControllerBase : MonoBehaviour
       
    }
 
-   protected void OnJumpButton(eZoneType obj)
+   protected virtual void OnJumpButton(eZoneType obj)
    {
       JumperStart(obj);
    }
@@ -47,6 +47,7 @@ public class JumperControllerBase : MonoBehaviour
    {
       if (obj.Equals(_zoneType) || isForced)
       {
+         OnThrow?.Invoke();
          IsThrowing = true;
          List<BoxController> boxesToThrow = new List<BoxController>();
          for (int i = 0; i < _boxControllers.Count; i++)

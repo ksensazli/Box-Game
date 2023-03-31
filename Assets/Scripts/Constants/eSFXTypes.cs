@@ -4,5 +4,6 @@ public enum eSFXTypes
     FlyingWoosh,
     Success,
     DuctTapeBox,
-    FailBox
+    FailBox,
+    SuccessBox
 }

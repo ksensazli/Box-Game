@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class JumperOnAir : JumperControllerBase
 {
+
     public Transform BoxCenterPos;
     [SerializeField] private Transform _bounceRotation;
+    private Tween _falseThrowTween;
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -24,12 +26,25 @@ public class JumperOnAir : JumperControllerBase
         JumpButton.OnJumpButton -= OnJumpButton;
     }
 
-    public void CollisionEffect()
+    protected override void OnJumpButton(eZoneType obj)
+    {
+        KillFalseThrow();
+        base.OnJumpButton(obj);
+    }
+
+    public void KillFalseThrow()
+    {
+        _falseThrowTween?.Kill();
+    }
+    public void CollisionEffect(Action callback)
     {
         DOTween.Kill(_rotationBase);
-        DOTween.Sequence().Append(_rotationBase.DOLocalRotate(_bounceRotation.localRotation.eulerAngles,  GameConfig.Instance.JumpersVariables.JumperJumpTween.Duration / 2)
+        _falseThrowTween = DOTween.Sequence()
+            .Append(_rotationBase.DOLocalRotate(_bounceRotation.localRotation.eulerAngles,  GameConfig.Instance.JumpersVariables.JumperJumpTween.Duration*2f)
                 .SetEase( GameConfig.Instance.JumpersVariables.JumperJumpTween.Ease))
-            .Append(_rotationBase.DOLocalRotate(Vector3.zero,  GameConfig.Instance.JumpersVariables.JumperResetTween.Duration / 2)
-                .SetEase( GameConfig.Instance.JumpersVariables.JumperResetTween.Ease));
+            .Append(_rotationBase.DOLocalRotate(Vector3.zero,  GameConfig.Instance.JumpersVariables.JumperResetTween.Duration * 1.5f)
+                .SetEase( GameConfig.Instance.JumpersVariables.JumperResetTween.Ease))
+            .AppendCallback(()=>callback?.Invoke());
+        
     }
 }
