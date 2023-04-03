@@ -48,10 +48,11 @@ MonoBehaviour:
   _cubeSpawners:
   - {fileID: 5496661464725937805}
   LevelData:
+    LevelCameraType: 0
     TotalBoxSpawnAmount: 50
     Splines:
     - Spawner: {fileID: 5496661464725937805}
-      CubeSpawnPeriod: 1.5
+      CubeSpawnPeriod: 2
       CubeMovementSpeed: 2
       IsReverted: 0
       IncludedZoneTypes: 00000000
@@ -73,6 +74,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4213279176759410183}
     m_Modifications:
+    - target: {fileID: 1332644888813652790, guid: 26a4fc5ad18ea429083ba3a4058b7713,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000018291734
+      objectReference: {fileID: 0}
     - target: {fileID: 1332644888813652791, guid: 26a4fc5ad18ea429083ba3a4058b7713,
         type: 3}
       propertyPath: _result.forward.y
