@@ -187,6 +187,7 @@ MonoBehaviour:
   _cubeSpawners:
   - {fileID: 5496661464725937805}
   LevelData:
+    LevelCameraType: 2
     TotalBoxSpawnAmount: 50
     Splines:
     - Spawner: {fileID: 5496661464725937805}
@@ -208,7 +209,6 @@ MonoBehaviour:
         - {fileID: 7102328927292127749}
     JumpersOnAir: []
     JumpersAutomatic: []
-  LevelCameraType: 2
 --- !u!1 &5821043437546950304
 GameObject:
   m_ObjectHideFlags: 0

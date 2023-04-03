@@ -50,7 +50,8 @@ MonoBehaviour:
   - {fileID: 5496661464725937805}
   - {fileID: 3207807369605607318}
   LevelData:
-    TotalBoxSpawnAmount: 20
+    LevelCameraType: 0
+    TotalBoxSpawnAmount: 30
     Splines:
     - Spawner: {fileID: 5496661464725937805}
       CubeSpawnPeriod: 1

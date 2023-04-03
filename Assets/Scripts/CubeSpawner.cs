@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Dreamteck.Splines;
 using NiceSDK;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CubeSpawner : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CubeSpawner : MonoBehaviour
     private LevelVariablesEditor.LevelSplineData _levelSplineData;
     private List<eZoneType> remainingZone = new List<eZoneType>();
     private bool _removing;
+    private IEnumerator spawnRoutine;
     private void OnEnable()
     {
         GameManager.OnLevelStarted += OnLevelStarted;
@@ -40,7 +42,9 @@ public class CubeSpawner : MonoBehaviour
         {
             remainingZone.Add( _levelSplineData.IncludedZoneTypes[i]);
         }
-        StartCoroutine(StartToSpawnCube());
+
+        spawnRoutine = StartToSpawnCube();
+        StartCoroutine(spawnRoutine);
         
     }
     private void OnTargetBoxFull(eZoneType obj)
@@ -59,14 +63,17 @@ public class CubeSpawner : MonoBehaviour
             }
             else
             {
+                if (remainingZone.Count.Equals(0))
+                {
+                    break;
+                }
                 var dummyCube = PoolManager.Instance.Dequeue(ePoolType.Box).GetComponent<BoxController>();
+                int targetType = UnityEngine.Random.Range(0, remainingZone.Count);
                 dummyCube.Init(_splineComputer,_levelSplineData.CubeMovementSpeed,
-                    remainingZone[UnityEngine.Random.Range(0,  remainingZone.Count)]);  
+                    remainingZone[targetType]);  
                 OnBoxSpawned?.Invoke();
                 yield return new WaitForSeconds(_levelSplineData.CubeSpawnPeriod);
             }
-         
-           
         }
     }
 }

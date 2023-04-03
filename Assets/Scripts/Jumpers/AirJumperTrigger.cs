@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class AirJumperTrigger : MonoBehaviour
 {
    [SerializeField] private JumperOnAir _jumperControllerBase;
    private BoxController _boxController;
+   private List<BoxController> _boxes = new List<BoxController>();
 
    private void OnEnable()
    {
@@ -33,7 +35,12 @@ public class AirJumperTrigger : MonoBehaviour
       if (other.CompareTag(nameof(eTags.box)))
       {
          var boxController = other.GetComponent<BoxController>();
+         if (_boxes.Contains(boxController))
+         {
+            return;
+         }
          _boxController = boxController;
+         _boxes.Add(boxController);
          if (boxController.AirJumperIndex -1 > _jumperControllerBase._index)
          {
             return;

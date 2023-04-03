@@ -7,12 +7,14 @@ using NiceSDK;
 public class BoxController : MonoBehaviour
 {
   public static Action<eZoneType> OnBoxCollected;
+  public static Action OnBoxAction;
   
   [SerializeField] private SplineFollower _splineFollower;
   [SerializeField] private LayerMask _layerMask;
   [SerializeField] private Rigidbody _rigidBody;
   [SerializeField] private BoxCollider _boxCollider;
   [SerializeField] private MeshRenderer _meshRenderer;
+  [SerializeField] private GameObject _trail;
 
   private bool _isThrown;
   private bool _isCorrectThrow;
@@ -25,6 +27,7 @@ public class BoxController : MonoBehaviour
   
   private void OnEnable()
   {
+    _trail.gameObject.SetActive(false);
     GameManager.OnLevelCompleted += OnLevelCompleted;
     GameManager.OnLevelFailed += OnLevelFailed;
     TargetBoxController.OnTargetBoxFull += OnTargetBoxFull;
@@ -49,13 +52,22 @@ public class BoxController : MonoBehaviour
   {
     if (obj == ZoneType)
     {
-      transform.ScaleDown(()=>PoolManager.Instance.Queue(ePoolType.Box,gameObject));
+      stopMovement();
+      if (!_isThrown)
+      {
+        OnBoxAction?.Invoke();
+      }
+      transform.ScaleDown(()=>
+      {
+        PoolManager.Instance.Queue(ePoolType.Box, gameObject);
+      });
     }
   }
 
 
   private void OnEndReached(double obj)
   {
+    OnBoxAction?.Invoke();
     _splineFollower.onEndReached -= OnEndReached;
     ReturnToPool();
   }
@@ -116,6 +128,8 @@ public class BoxController : MonoBehaviour
 
   public void jump(bool isJumperOnAir)
   {
+    
+    _trail.gameObject.SetActive(true);
     _boxCollider.enabled = false;
     _isThrown = true;
     bool hasJumperOnAir = LevelManager.Instance.Level.LevelData.HasJumperOnAir;
@@ -193,6 +207,8 @@ public class BoxController : MonoBehaviour
 
   public void FallFromAir(Vector3 direction)
   {
+    OnBoxAction?.Invoke();
+    
     transform.parent = null;
     _rigidBody.useGravity = true;
     _rigidBody.velocity = (direction * 4) ;
@@ -211,7 +227,11 @@ public class BoxController : MonoBehaviour
   {
     _rigidBody.velocity = TKExtensions.CalculateVelocity(_rigidBody.position,TargetBoxesManager.Instance.GetTargetBoxController(ZoneType)
       .transform.position + new Vector3(UnityEngine.Random.Range(-2,2),1.5f,UnityEngine.Random.Range(1.5f,2)),60);
-    DOVirtual.DelayedCall(1, () => SoundManager.Instance.PlaySound(eSFXTypes.FailBox));
+    DOVirtual.DelayedCall(1, () =>
+    {
+      OnBoxAction?.Invoke();
+      SoundManager.Instance.PlaySound(eSFXTypes.FailBox);
+    });
     DOVirtual.DelayedCall(5,ReturnToPool);
   }
   
@@ -230,7 +250,9 @@ public class BoxController : MonoBehaviour
     {
       SoundManager.Instance.PlaySound(eSFXTypes.SuccessBox);
       _isCollected = true;
-      OnBoxCollected?.Invoke(ZoneType); 
+      OnBoxCollected?.Invoke(ZoneType);
+
+      DOVirtual.DelayedCall(.25f, () => OnBoxAction?.Invoke());
     }
   }
 

@@ -204,6 +204,7 @@ MonoBehaviour:
   _rigidBody: {fileID: 2542277523669659019}
   _boxCollider: {fileID: 2542277523669659018}
   _meshRenderer: {fileID: 3784833834271154465}
+  _trail: {fileID: 8975313937782724725}
   ZoneType: 0
   AirJumperIndex: 0
 --- !u!54 &2542277523669659019
@@ -348,6 +349,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trail
       objectReference: {fileID: 0}
+    - target: {fileID: 3779649808716825279, guid: 77bece4089fe586438b7979caee70f79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8272701021648327317, guid: 77bece4089fe586438b7979caee70f79,
         type: 3}
       propertyPath: m_RootOrder
@@ -405,3 +411,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77bece4089fe586438b7979caee70f79, type: 3}
+--- !u!1 &8975313937782724725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3779649808716825279, guid: 77bece4089fe586438b7979caee70f79,
+    type: 3}
+  m_PrefabInstance: {fileID: 5258721126247717578}
+  m_PrefabAsset: {fileID: 0}

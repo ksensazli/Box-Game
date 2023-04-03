@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
     public Level Level;
     private int fullBoxAmount;
     public int RemainingBoxAmount { get; private set; }
+    public int RemainingBoxAmountAction { get; private set; }
     
     private void OnEnable()
     {
@@ -18,6 +19,7 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
         GameManager.OnLevelStarted += OnLevelStarted;
         TargetBoxController.OnTargetBoxFull += OnTargetBoxFull;
         CubeSpawner.OnBoxSpawned += OnBoxSpawned;
+        BoxController.OnBoxAction += OnBoxaction;
         InitLevel();
     }
 
@@ -28,6 +30,16 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
         GameManager.OnLevelStarted -= OnLevelStarted;
         TargetBoxController.OnTargetBoxFull -= OnTargetBoxFull;
         CubeSpawner.OnBoxSpawned -= OnBoxSpawned;
+        BoxController.OnBoxAction -= OnBoxaction;
+    }
+
+    private void OnBoxaction()
+    {
+        RemainingBoxAmountAction--;
+        if (RemainingBoxAmountAction.Equals(0) && GameManager.Instance.GameState.Equals(eGameStates.Failed))
+        {
+            GameManager.Instance.FailLevel();
+        }
     }
 
     private void OnBoxSpawned()
@@ -35,9 +47,10 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
         RemainingBoxAmount--;
         RemainingBoxAmount = Mathf.Clamp(RemainingBoxAmount,0, 1000);
         OnRemainingBoxAmountChanged?.Invoke(RemainingBoxAmount);
+
         if (RemainingBoxAmount.Equals(0))
         {
-            GameManager.Instance.FailLevel();
+            GameManager.Instance.GameState = eGameStates.Failed;
         }
     }
 
@@ -70,6 +83,7 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
         Level = Instantiate( GameConfig.Instance.LevelVariables.Levels[PlayerPrefManager.Instance.CurrentLevelMod], transform);
         CurrentLevelData = Level.LevelData;
         RemainingBoxAmount = Level.LevelData.TotalBoxSpawnAmount;
+        RemainingBoxAmountAction = RemainingBoxAmount;
         OnRemainingBoxAmountChanged?.Invoke(RemainingBoxAmount);
     }
     

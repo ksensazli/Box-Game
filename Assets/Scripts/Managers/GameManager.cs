@@ -52,10 +52,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         
         
         Debug.Log("Game state changing : "+ eGameStates.Failed);
-        if (GameState.Equals(eGameStates.Failed))
-        {
-            return;
-        }
+
         
         OnLevelFailed?.Invoke();
         GameState = eGameStates.Failed;

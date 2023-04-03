@@ -42,34 +42,35 @@ public class TargetBoxesManager : MonoBehaviourSingleton<TargetBoxesManager>
             TargetBoxes[eZoneType.Type1].transform.position = new Vector3(
                 0,
                 TargetBoxes[eZoneType.Type1].transform.position.y,
-                TargetBoxes[eZoneType.Type1].transform.position.z);
+                isTopDown ? 5f :  7.5f);
         }
         else if (includedTypes.Equals(2))
         {
             TargetBoxes[eZoneType.Type1].transform.position = new Vector3(
                 -2,
                 TargetBoxes[eZoneType.Type1].transform.position.y,
-                isTopDown ? 5f :  TargetBoxes[eZoneType.Type1].transform.position.z);
+                isTopDown ? 5f :  7.5f);
             TargetBoxes[eZoneType.Type2].transform.position = new Vector3(
                 2,
                 TargetBoxes[eZoneType.Type2].transform.position.y,
-                isTopDown ? 5f : TargetBoxes[eZoneType.Type2].transform.position.z);
+                isTopDown ? 5f : 7.5f);
         }
         else
         {
             TargetBoxes[eZoneType.Type1].transform.position = new Vector3(
                 -2.5f,
                 TargetBoxes[eZoneType.Type1].transform.position.y,
-                TargetBoxes[eZoneType.Type1].transform.position.z);
+                isTopDown ? 5f :  7.5f);
             TargetBoxes[eZoneType.Type2].transform.position = new Vector3(
                 0,
                 TargetBoxes[eZoneType.Type2].transform.position.y,
-                TargetBoxes[eZoneType.Type2].transform.position.z);
+                isTopDown ? 5f :  7.5f);
             TargetBoxes[eZoneType.Type3].transform.position = new Vector3(
                 2.5f,
                 TargetBoxes[eZoneType.Type3].transform.position.y,
-                TargetBoxes[eZoneType.Type3].transform.position.z);
+                isTopDown ? 5f :  7.5f);
         }
+        
     }
 
     public TargetBoxController GetTargetBoxController(eZoneType zoneType)
