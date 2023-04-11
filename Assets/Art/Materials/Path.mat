@@ -26,8 +26,10 @@ Material:
   - _MK_ALBEDO_MAP
   - _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+  - _MK_IRIDESCENCE_DEFAULT
   - _MK_LIGHT_CEL
   - _MK_RECEIVE_SHADOWS
+  - _MK_RIM_DEFAULT
   - _MK_SPECULAR_ISOTROPIC
   - _MK_WRAPPED_DIFFUSE
   m_InvalidKeywords:
@@ -168,7 +170,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AdvancedTab: 1
+    - _AdvancedTab: 0
     - _AlphaClip: 0
     - _AlphaClipping: 0
     - _AlphaCutoff: 0.5
@@ -206,14 +208,14 @@ Material:
     - _HatchingMapScale: 1
     - _Initialized: 1
     - _InputTab: 1
-    - _Iridescence: 0
+    - _Iridescence: 1
     - _IridescenceSize: 1
     - _IridescenceSmoothness: 0.5
     - _IridescenceThresholdOffset: 0
     - _Light: 1
     - _LightBands: 4
     - _LightBandsScale: 0.5
-    - _LightThreshold: 0.4
+    - _LightThreshold: 0.537
     - _Metallic: 0
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
@@ -223,18 +225,18 @@ Material:
     - _ReceiveShadows: 1
     - _RenderFace: 2
     - _RenderPriority: 0
-    - _Rim: 0
-    - _RimSize: 1
-    - _RimSmoothness: 0.5
+    - _Rim: 1
+    - _RimSize: 1.09
+    - _RimSmoothness: 0.513
     - _RimThresholdOffset: 0.25
     - _Saturation: 1
     - _SketchMapScale: 1
-    - _Smoothness: 0.224
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _Specular: 1
     - _SpecularHighlights: 1
     - _SpecularIntensity: 1
-    - _SpecularSmoothness: 1
+    - _SpecularSmoothness: 0
     - _SpecularThresholdOffset: 0.25
     - _SrcBlend: 1
     - _Stencil: 1
@@ -262,12 +264,12 @@ Material:
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GoochDarkColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
-    - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
-    - _RimBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GoochDarkColor: {r: 1, g: 1, b: 1, a: 1}
+    - _IridescenceColor: {r: 0.6981132, g: 0, b: 0, a: 0.5}
+    - _RimBrightColor: {r: 0.44716978, g: 0.7669442, b: 1, a: 1}
+    - _RimColor: {r: 0.56037736, g: 0.77658117, b: 1, a: 1}
+    - _RimDarkColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SpecularColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 1}
+    - _SpecularColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
     - _VertexAnimationFrequency: {r: 2.5, g: 2.5, b: 2.5, a: 1}
   m_BuildTextureStacks: []
